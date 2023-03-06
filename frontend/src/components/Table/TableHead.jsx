@@ -1,6 +1,6 @@
 import React from 'react';
-import { getMovies } from '../services/movieServices';
-import './TableHead.css';
+import { getMovies } from '../../services/movieServices';
+import styles from './TableHead.module.css';
 
 const TableHead = (props) => {
   const { title, handleState } = props;
@@ -29,10 +29,11 @@ const TableHead = (props) => {
   };
 
   return (
-    <th>
-      <div>
+    <th className={styles.th}>
+      <div className={styles.head}>
         {title}
         <input
+          className={styles.input}
           type='text'
           onKeyUp={handleFilter}
           onBlur={handleClear}

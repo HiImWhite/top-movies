@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TableHead from './TableHead';
-import { getMovies } from '../services/movieServices';
-import './Table.css';
+import { getMovies } from '../../services/movieServices';
+import styles from './Table.module.css';
 
 const HeadTitles = [
   'Rank',
@@ -31,7 +31,7 @@ const Table = () => {
   }, []);
 
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           {HeadTitles.map((title) => (
