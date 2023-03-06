@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './List.module.css';
+import './List.css';
 
 const List = () => {
   const [movies, setMovies] = useState([]);
@@ -14,22 +14,22 @@ const List = () => {
   }, []);
 
   return (
-    <table className={styles.table}>
+    <table>
       <thead>
         <tr>
-          <th className={styles.tableHeader}>Rank</th>
-          <th className={styles.tableHeader}>Name</th>
-          <th className={styles.tableHeader}>Year</th>
-          <th className={styles.tableHeader}>Rating</th>
-          <th className={styles.tableHeader}>Genre</th>
-          <th className={styles.tableHeader}>Certificate</th>
-          <th className={styles.tableHeader}>Run Time</th>
-          <th className={styles.tableHeader}>Tagline</th>
-          <th className={styles.tableHeader}>Budget</th>
-          <th className={styles.tableHeader}>Box Office</th>
-          <th className={styles.tableHeader}>Casts</th>
-          <th className={styles.tableHeader}>Directors</th>
-          <th className={styles.tableHeader}>Writers</th>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Year</th>
+          <th>Rating</th>
+          <th>Genre</th>
+          <th>Certificate</th>
+          <th>Run Time</th>
+          <th>Tagline</th>
+          <th>Budget</th>
+          <th>Box Office</th>
+          <th>Casts</th>
+          <th>Directors</th>
+          <th>Writers</th>
         </tr>
       </thead>
       <tbody>
@@ -54,3 +54,5 @@ const List = () => {
     </table>
   );
 };
+
+export default List;
