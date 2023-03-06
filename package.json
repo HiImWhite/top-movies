@@ -1,0 +1,28 @@
+{
+  "name": "top-movies",
+  "description": "App using the IMDB Top 250 movies dataset.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && npm start",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HiImWhite/top-movies.git"
+  },
+  "keywords": [
+    "IMDB"
+  ],
+  "author": "Wojciech Bielawa, Jakub Jankowski, Krzysztof Bącała",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HiImWhite/top-movies/issues"
+  },
+  "homepage": "https://github.com/HiImWhite/top-movies#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
