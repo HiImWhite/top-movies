@@ -3,15 +3,6 @@ table {
   width: 100%;
 }
 
-th {
-  background-color: #b66d00;
-  border: 1px solid #ddd;
-  color: #fff;
-  font-weight: bold;
-  padding: 6px;
-  text-align: center;
-}
-
 td {
   border: 1px solid #ddd;
   padding: 8px;

@@ -1,0 +1,21 @@
+th {
+  background-color: #b66d00;
+  border: 1px solid #ddd;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px;
+  text-align: center;
+}
+
+th > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  font-size: 16px;
+  padding: 4px;
+  border: 1px solid #ddd;
+  max-width: 10rem;
+}
