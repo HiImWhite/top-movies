@@ -11,8 +11,9 @@ const start = (req, res, next) => {
 
 const getAllMovies = async (req, res) => {
   try {
-    const movies = await MovieModel.find({});
-    console.log(movies);
+    // const movies = await MovieModel.find({});
+    const filters = req.query;
+    const movies = await MovieModel.find(filters);
     res.status(200).send(movies);
   } catch (err) {
     res.status(500).send(err);
