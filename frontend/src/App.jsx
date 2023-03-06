@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Table from './components/Table/Table';
 import StickyButton from './components/StickyButton/StickyButton';
-import Modal from './components/Modal/Modal';
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
@@ -14,7 +13,6 @@ function App() {
           setOpenModal(true);
         }}
       />
-      <Modal open={openModal} handleClose={() => setOpenModal(false)} />
     </div>
   );
 }
