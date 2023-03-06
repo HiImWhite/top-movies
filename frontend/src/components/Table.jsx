@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import TableHead from './TableHead';
+import { getMovies } from '../services/movieServices';
 import './Table.css';
+
+const HeadTitles = [
+  'Rank',
+  'Name',
+  'Year',
+  'Rating',
+  'Genre',
+  'Certificate',
+  'Run Time',
+  'Tagline',
+  'Budget',
+  'Box Office',
+  'Casts',
+  'Directors',
+  'Writers',
+];
 
 const Table = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('http://localhost:8000/movies');
+      const response = await getMovies();
       setMovies(response.data);
     };
     fetchData();
@@ -17,19 +34,9 @@ const Table = () => {
     <table>
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Year</th>
-          <th>Rating</th>
-          <th>Genre</th>
-          <th>Certificate</th>
-          <th>Run Time</th>
-          <th>Tagline</th>
-          <th>Budget</th>
-          <th>Box Office</th>
-          <th>Casts</th>
-          <th>Directors</th>
-          <th>Writers</th>
+          {HeadTitles.map((title) => (
+            <TableHead key={title} title={title} handleState={setMovies} />
+          ))}
         </tr>
       </thead>
       <tbody>
