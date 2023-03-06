@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './List.css';
+import './Table.css';
 
-const List = () => {
+const Table = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -55,4 +55,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default Table;
