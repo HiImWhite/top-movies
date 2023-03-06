@@ -15,7 +15,7 @@ const getAllMovies = async (req, res) => {
     console.log(params);
 
     if (!Object.keys(params).length) {
-      const movies = await MovieModel.find({});
+      const movies = await MovieModel.find({}).sort({ rank: 1 });
       res.status(200).send(movies);
     } else {
       const key = Object.keys(params);
@@ -25,7 +25,7 @@ const getAllMovies = async (req, res) => {
       filters[key] = { $regex: value, $options: 'i' };
       console.log(filters);
 
-      const movies = await MovieModel.find(filters);
+      const movies = await MovieModel.find(filters).sort({ rank: 1 });
       res.status(200).send(movies);
     }
   } catch (err) {
