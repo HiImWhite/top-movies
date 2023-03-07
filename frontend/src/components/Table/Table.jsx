@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TableHead from './TableHead';
 import { getMovies } from '../../services/movieServices';
 import styles from './Table.module.css';
+import EditButton from '../EditButton/EditButton';
 
 const HeadTitles = [
   'Rank',
@@ -46,6 +47,7 @@ const Table = () => {
                 handleInput={setInput}
               />
             ))}
+            <TableHead title='Actions' filterDisabled={true} />
           </tr>
         </thead>
         {movies.length > 0 && (
@@ -65,6 +67,9 @@ const Table = () => {
                 <td>{movie.casts}</td>
                 <td>{movie.directors}</td>
                 <td>{movie.writers}</td>
+                <td>
+                  <EditButton />
+                </td>
               </tr>
             ))}
           </tbody>
