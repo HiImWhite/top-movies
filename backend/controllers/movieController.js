@@ -20,9 +20,8 @@ const getAllMovies = async (req, res) => {
     } else {
       const key = Object.keys(params);
       const value = Object.values(params).pop();
-      const filters = {};
+      const filters = { [key]: { $regex: value, $options: 'i' } };
 
-      filters[key] = { $regex: value, $options: 'i' };
       console.log(filters);
 
       const movies = await MovieModel.find(filters).sort({ rank: 1 });
