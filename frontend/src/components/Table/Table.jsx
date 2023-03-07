@@ -26,8 +26,16 @@ const Table = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getMovies();
-      setMovies(response.data);
+      // try {
+      //   const response = await getMovies();
+      //   setMovies(response.data);
+      // } catch (err) {
+      //   console.log(err);
+      // }
+
+      await getMovies()
+        .then(({ data }) => setMovies(data))
+        .catch((err) => console.log(err));
     };
 
     fetchData();
