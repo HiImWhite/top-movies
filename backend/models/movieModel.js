@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
-  rank: Number,
+  rank: String,
   name: String,
   year: Number,
   rating: String,
@@ -16,4 +16,4 @@ const movieSchema = new mongoose.Schema({
   writers: String,
 });
 
-module.exports = mongoose.model('Movie', movieSchema);
+module.exports = mongoose.model("Movie", movieSchema);
