@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
   rank: String,
@@ -16,4 +16,4 @@ const movieSchema = new mongoose.Schema({
   writers: String,
 });
 
-module.exports = mongoose.model('Movie', movieSchema);
+module.exports = mongoose.model("Movie", movieSchema);

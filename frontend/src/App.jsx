@@ -6,14 +6,15 @@ function App() {
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className='App'>
-      <Table />
-      <StickyButton
-        handleOpen={() => {
-          setOpenModal(true);
-        }}
-      />
-    </div>
+      <div className='App'>
+        <Table />
+        <StickyButton
+          handleOpen={() => {
+            setOpenModal(true);
+          }}
+        />
+      </div>
+
   );
 }
 
