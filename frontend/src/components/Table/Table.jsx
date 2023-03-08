@@ -26,12 +26,12 @@ const Table = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // try {
-      //   const response = await getMovies();
-      //   setMovies(response.data);
-      // } catch (err) {
-      //   console.log(err);
-      // }
+      try {
+        const response = await getMovies();
+        setMovies(response.data);
+      } catch (err) {
+        console.log(err);
+      }
 
       await getMovies()
         .then(({ data }) => setMovies(data))
