@@ -1,17 +1,45 @@
 .form {
-    position: fixed;
-    bottom: 200px;
-    right: 50px;
-    width: 200px;
-    background-color: azure;
-    border: 4px black solid;
-    color: black;
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
 }
 
-.input {
-    font-size: 16px;
-    padding: 4px;
-    border: 1px solid #ddd;
-    max-width: 10rem;
+.textInputs {
+  display: flex;
+  width: 45%;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.input[type='text'] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  width: 45%;
+  margin-bottom: 10px;
+}
+
+.input[type='submit'] {
+  padding: 12px;
+  background: #ccc;
+  border: 0 none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25,
+  .col-75,
+  input[type='submit'] {
+    width: 100%;
+    margin-top: 0;
   }
-  
+}
