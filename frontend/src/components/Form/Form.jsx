@@ -1,4 +1,5 @@
 import styles from './Form.module.css';
+import { addMovie } from '../../services/movieServices';
 
 const movieSchema = {
   rank: String,
@@ -19,7 +20,20 @@ const movieSchema = {
 const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit');
+
+    const formData = {};
+    Object.keys(movieSchema).forEach((key) => {
+      formData[key] = e.target.elements[key].value;
+    });
+    console.log(formData);
+
+    addMovie(formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -29,8 +43,10 @@ const Form = () => {
           <input
             className={styles.input}
             type='text'
-            placeholder={key}
-            title={`Type in a ${key}`}></input>
+            placeholder={key === 'rank' ? '>250' : key}
+            title={`Type in a ${key}`}
+            disabled={key === 'rank' ? true : false}
+            name={key}></input>
         </div>
       ))}
       <div className={styles.submitButton}>
