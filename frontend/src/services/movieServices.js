@@ -14,6 +14,6 @@ export function addMovie(movie) {
   return axios.post(apiUrl, movie);
 }
 
-export function updateTask(id, movie) {
+export function updateMovie(id, movie) {
   return axios.put(apiUrl + '/' + id, movie);
 }
