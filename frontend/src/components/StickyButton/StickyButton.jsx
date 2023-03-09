@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Form from '../Form/Form';
 import AddIcon from '../Icons/AddIcon';
 import Modal from '../Modal/Modal';
 import styles from './StickyButton.module.css';
@@ -15,7 +16,7 @@ const StickyButton = () => {
         title='Add data'
         open={openModal}
         handleClose={() => setOpenModal(false)}>
-        Formularz
+        <Form />
       </Modal>
     </>
   );
