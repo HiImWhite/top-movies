@@ -1,0 +1,17 @@
+.form {
+    position: fixed;
+    bottom: 200px;
+    right: 50px;
+    width: 200px;
+    background-color: azure;
+    border: 4px black solid;
+    color: black;
+}
+
+.input {
+    font-size: 16px;
+    padding: 4px;
+    border: 1px solid #ddd;
+    max-width: 10rem;
+  }
+  
