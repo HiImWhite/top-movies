@@ -58,6 +58,7 @@
   top: 0;
   padding: calc(0.5rem * 0.75) calc(0.5rem * 0.5);
   margin: calc(0.5rem * 0.75) calc(0.5rem * 0.5);
+  white-space: nowrap;
   transform: translate(0, 0);
   transform-origin: 0 0;
   background: white;
@@ -70,10 +71,13 @@
 }
 
 .field {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.23);
   padding: calc(0.5rem * 1.5) 0.5rem;
   color: currentColor;
-  background: white;
+  background: transparent;
   border-radius: 4px;
   outline: none;
 }
