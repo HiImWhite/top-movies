@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import CloseIcon from '../Icons/CloseIcon';
 import styles from './Modal.module.css';
 
-const Modal = ({open, handleClose, title = "", children}) => {
+const Modal = ({ open, handleClose, title = '', children }) => {
   if (!open) return null;
 
   return ReactDOM.createPortal(
