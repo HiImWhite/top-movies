@@ -40,8 +40,7 @@ const Form = () => {
     <div className={styles.content}>
       <form id='form' className={styles.form} onSubmit={handleSubmit}>
         {Object.keys(movieSchema).map((key, i) => (
-          <>
-            {/* <div key={key} className={styles.textInputs}>
+          /* <div key={key} className={styles.textInputs}>
             <input
               className={styles.input}
               type='text'
@@ -54,16 +53,24 @@ const Form = () => {
               disabled={key === 'rank' ? true : false}
               name={key}
             />
-          </div> */}
-            <label key={key} className={styles.input}>
-              <input className={styles.field} type='text' placeholder=' ' />
+          </div> */
+          <div key={key}>
+            <label className={styles.input}>
+              <input
+                className={styles.field}
+                type='text'
+                placeholder=' '
+                title={`Type in a ${key}`}
+                name={key}
+                autoComplete='off'
+              />
               <span className={styles.label}>
                 {key === 'rank'
                   ? '>250'
                   : key.charAt(0).toUpperCase() + key.slice(1)}
               </span>
             </label>
-          </>
+          </div>
         ))}
       </form>
       <div className={styles.submit}>
