@@ -1,8 +1,9 @@
-const MovieModel = require("../models/movieModel");
+const MovieModel = require('../models/movieModel');
+const { findRank } = require('../utilis/helperFunctions');
 
 const start = (req, res, next) => {
   try {
-    return res.status(200).json("Hello there");
+    return res.status(200).json('Hello there');
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
@@ -22,7 +23,7 @@ const getAllMovies = async (req, res) => {
     } else {
       const key = Object.keys(params);
       const value = Object.values(params).pop();
-      const filters = { [key]: { $regex: value, $options: "i" } };
+      const filters = { [key]: { $regex: value, $options: 'i' } };
 
       console.log(filters);
 
@@ -40,8 +41,26 @@ const postMovie = async (req, res) => {
   try {
     const params = req.body;
     console.log(params);
+    const allMovies = await MovieModel.find({})
+      .sort({ rank: 1 })
+      .collation({ locale: 'en_US', numericOrdering: true });
+    const rank = findRank(allMovies, params);
+    console.log(rank);
+
+    // await MovieModel.findOneAndDelete({ name: 'Test 3' });
+
+    allMovies.forEach(async (movie) => {
+      if (movie.rank >= rank) {
+        console.log(typeof (+movie.rank + 1).toString());
+        await MovieModel.findOneAndUpdate(
+          { rank: movie.rank },
+          { rank: (+movie.rank + 1).toString() },
+        );
+      }
+    });
+
     const movies = await MovieModel.create({
-      rank: params.rank,
+      rank: rank,
       name: params.name,
       year: params.year,
       rating: params.rating,
