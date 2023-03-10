@@ -2,7 +2,7 @@ import styles from './Form.module.css';
 import { addMovie } from '../../services/movieServices';
 
 const movieSchema = {
-  rank: String,
+  // rank: String,
   name: String,
   year: String,
   rating: String,
@@ -37,22 +37,45 @@ const Form = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      {Object.keys(movieSchema).map((key, i) => (
-        <div key={key} className={styles.textInputs}>
-          <input
-            className={styles.input}
-            type='text'
-            placeholder={key === 'rank' ? '>250' : key}
-            title={`Type in a ${key}`}
-            disabled={key === 'rank' ? true : false}
-            name={key}></input>
-        </div>
-      ))}
-      <div className={styles.submitButton}>
-        <input className={styles.input} type='submit' value='Submit' />
+    <div className={styles.content}>
+      <form id='form' className={styles.form} onSubmit={handleSubmit}>
+        {Object.keys(movieSchema).map((key, i) => (
+          <>
+            {/* <div key={key} className={styles.textInputs}>
+            <input
+              className={styles.input}
+              type='text'
+              placeholder={
+                key === 'rank'
+                  ? '>250'
+                  : key.charAt(0).toUpperCase() + key.slice(1)
+              }
+              title={`Type in a ${key}`}
+              disabled={key === 'rank' ? true : false}
+              name={key}
+            />
+          </div> */}
+            <label key={key} className={styles.input}>
+              <input className={styles.field} type='text' placeholder=' ' />
+              <span className={styles.label}>
+                {key === 'rank'
+                  ? '>250'
+                  : key.charAt(0).toUpperCase() + key.slice(1)}
+              </span>
+            </label>
+          </>
+        ))}
+      </form>
+      <div className={styles.submit}>
+        <button
+          form='form'
+          className={styles.button}
+          type='submit'
+          value='submit'>
+          Add data
+        </button>
       </div>
-    </form>
+    </div>
   );
 };
 

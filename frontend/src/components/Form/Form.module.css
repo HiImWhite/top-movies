@@ -1,12 +1,16 @@
 .form {
-  overflow-x: hidden;
+  /* overflow-x: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 100%;
+  max-width: 100%; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  padding: 8px;
 }
 
-.textInputs {
+/* .textInputs {
   display: flex;
   width: 45%;
   margin-bottom: 10px;
@@ -32,14 +36,89 @@
   border: 0 none;
   cursor: pointer;
   border-radius: 5px;
-}
+} */
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .col-25,
   .col-75,
   input[type='submit'] {
     width: 100%;
     margin-top: 0;
   }
+} */
+
+.input {
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: calc(0.5rem * 0.75) calc(0.5rem * 0.5);
+  margin: calc(0.5rem * 0.75) calc(0.5rem * 0.5);
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background: white;
+  transition: transform 120ms ease-in;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.2;
+  cursor: text;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.field {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  padding: calc(0.5rem * 1.5) 0.5rem;
+  color: currentColor;
+  background: white;
+  border-radius: 4px;
+  outline: none;
+}
+
+.field:focus + .label,
+.field:not(:placeholder-shown) + .label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: #b66d00;
+}
+
+.field:focus {
+  border-color: #b66d00;
+  border-width: 2px;
+  margin: -1px;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.button {
+  outline: 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  min-width: 64px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #b66d00;
+  transition: background-color 250ms;
+}
+
+.button:hover {
+  background-color: #965a00;
+}
+
+.content {
+  padding: 16px;
 }
