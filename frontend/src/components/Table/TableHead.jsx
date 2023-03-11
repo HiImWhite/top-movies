@@ -13,6 +13,7 @@ const TableHead = (props) => {
 
   const handleFilter = async (e) => {
     const value = e.target.value;
+    console.log(title.replace(' ', '_').toLowerCase());
     handleInput({ [title]: value });
 
     try {
@@ -21,7 +22,7 @@ const TableHead = (props) => {
         handleMovies(res.data);
         return;
       }
-      const params = { [title.toLowerCase()]: value };
+      const params = { [title.replace(' ', '_').toLowerCase()]: value };
       const res = await getMovies(params);
       handleMovies(res.data);
     } catch (err) {

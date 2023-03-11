@@ -11,3 +11,7 @@
   width: 32px;
   fill: white;
 }
+
+.icon:hover svg {
+  fill: #b66d00;
+}
