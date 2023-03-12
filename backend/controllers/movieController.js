@@ -80,8 +80,25 @@ const postMovie = async (req, res) => {
   }
 };
 
+const editMovie = async (req, res) => {
+  try {
+    const movieId = req.params.id;
+    const updatedMovie = req.body;
+    console.log(movieId, updatedMovie);
+
+    const movie = await MovieModel.findByIdAndUpdate(movieId, updatedMovie, {
+      new: true,
+    });
+
+    res.status(200).send(movie);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
 module.exports = {
   start,
   getAllMovies,
   postMovie,
+  editMovie,
 };
