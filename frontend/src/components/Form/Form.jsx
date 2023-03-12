@@ -1,5 +1,5 @@
 import styles from './Form.module.css';
-import { addMovie } from '../../services/movieServices';
+import { addMovie, updateMovie } from '../../services/movieServices';
 
 const movieSchema = {
   // rank: String,
@@ -17,7 +17,7 @@ const movieSchema = {
   writers: String,
 };
 
-const Form = () => {
+const Form = ({ isAdding, movieId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -27,13 +27,23 @@ const Form = () => {
     });
     console.log(formData);
 
-    addMovie(formData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (isAdding) {
+      addMovie(formData)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      updateMovie(movieId, formData)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -79,7 +89,7 @@ const Form = () => {
           className={styles.button}
           type='submit'
           value='submit'>
-          Add data
+          {isAdding ? 'Add data' : 'Edit data'}
         </button>
       </div>
     </div>
