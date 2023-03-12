@@ -19,7 +19,6 @@ const movieSchema = {
 
 const Form = ({ isAdding, movieId }) => {
   const handleSubmit = (e) => {
-    e.preventDefault();
 
     const formData = {};
     Object.keys(movieSchema).forEach((key) => {

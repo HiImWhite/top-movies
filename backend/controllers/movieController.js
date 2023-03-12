@@ -1,9 +1,9 @@
-const MovieModel = require('../models/movieModel');
-const { findRank } = require('../utilis/helperFunctions');
+const MovieModel = require("../models/movieModel");
+const { findRank } = require("../utilis/helperFunctions");
 
 const start = (req, res, next) => {
   try {
-    return res.status(200).json('Hello there');
+    return res.status(200).json("Hello there");
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
@@ -18,18 +18,18 @@ const getAllMovies = async (req, res) => {
     if (!Object.keys(params).length) {
       const movies = await MovieModel.find({})
         .sort({ rank: 1 })
-        .collation({ locale: 'en_US', numericOrdering: true });
+        .collation({ locale: "en_US", numericOrdering: true });
       res.status(200).send(movies);
     } else {
       const key = Object.keys(params);
       const value = Object.values(params).pop();
-      const filters = { [key]: { $regex: value, $options: 'i' } };
+      const filters = { [key]: { $regex: value, $options: "i" } };
 
       console.log(filters);
 
       const movies = await MovieModel.find(filters)
         .sort({ rank: 1 })
-        .collation({ locale: 'en_US', numericOrdering: true });
+        .collation({ locale: "en_US", numericOrdering: true });
       res.status(200).send(movies);
     }
   } catch (err) {
@@ -43,7 +43,7 @@ const postMovie = async (req, res) => {
     console.log(params);
     const allMovies = await MovieModel.find({})
       .sort({ rank: 1 })
-      .collation({ locale: 'en_US', numericOrdering: true });
+      .collation({ locale: "en_US", numericOrdering: true });
     const rank = findRank(allMovies, params);
     console.log(rank);
 
@@ -54,7 +54,7 @@ const postMovie = async (req, res) => {
         console.log(typeof (+movie.rank + 1).toString());
         await MovieModel.findOneAndUpdate(
           { rank: movie.rank },
-          { rank: (+movie.rank + 1).toString() },
+          { rank: (+movie.rank + 1).toString() }
         );
       }
     });
@@ -84,6 +84,13 @@ const editMovie = async (req, res) => {
   try {
     const movieId = req.params.id;
     const updatedMovie = req.body;
+    const oldMovie = await MovieModel.findById(movieId);
+
+    Object.keys(updatedMovie).map((key, value) => {
+      if (updatedMovie[key] == "") {
+        updatedMovie[key] = oldMovie[key];
+      }
+    });
     console.log(movieId, updatedMovie);
 
     const movie = await MovieModel.findByIdAndUpdate(movieId, updatedMovie, {
