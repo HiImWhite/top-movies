@@ -61,7 +61,7 @@ const Table = () => {
         {movies.length > 0 && (
           <tbody>
             {movies.map((movie) => (
-              <tr key={movie.rank}>
+              <tr key={movie._id}>
                 <td>{movie.rank}</td>
                 <td>{movie.name}</td>
                 <td>{movie.year}</td>
