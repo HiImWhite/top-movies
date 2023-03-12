@@ -6,17 +6,23 @@ import styles from './StickyButton.module.css';
 
 const StickyButton = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [isAdding, setIsAdding] = useState(true);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+    setIsAdding(true);
+  };
 
   return (
     <>
-      <div className={styles.icon} onClick={() => setOpenModal(true)}>
+      <div className={styles.icon} onClick={handleOpenModal}>
         <AddIcon />
       </div>
       <Modal
-        title='Add data'
+        title={isAdding ? 'Add data' : 'Edit data'}
         open={openModal}
         handleClose={() => setOpenModal(false)}>
-        <Form />
+        <Form isAdding={isAdding} />
       </Modal>
     </>
   );
