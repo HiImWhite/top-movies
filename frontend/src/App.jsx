@@ -5,14 +5,19 @@ import { useState } from 'react';
 import Stats from './components/Stats/Stats';
 
 function App() {
-  const [isTable, setIsTable] = useState(false);
+  const [isTable, setIsTable] = useState(true);
+
+  const colors = {
+    active: "#BBBBBB",
+    inActive: "#777777",
+  }
 
   const SelectedTable = {
-    backgroundColor: isTable ? "#BBBBBB" : "#777777"
+    backgroundColor: isTable ? colors.active : colors.inActive
   };
 
   const SelectedStats = {
-    backgroundColor: isTable ? "#777777" : "#BBBBBB"
+    backgroundColor: isTable ? colors.inActive : colors.active
   };
 
   return (
