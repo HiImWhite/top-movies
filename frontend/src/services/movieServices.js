@@ -1,19 +1,23 @@
-import axios from 'axios';
-const apiUrl = 'http://localhost:8000/movies';
+import axios from "axios";
+const apiUrl = "http://localhost:8000";
 
 export function getMovies(params = null) {
   if (params)
-    return axios.get(apiUrl, {
+    return axios.get(apiUrl + "/movies", {
       params: params,
     });
 
-  return axios.get(apiUrl);
+  return axios.get(apiUrl + "/movies");
 }
 
 export function addMovie(movie) {
-  return axios.post(apiUrl, movie);
+  return axios.post(apiUrl + "/movies", movie);
 }
 
 export function updateMovie(id, movie) {
-  return axios.put(apiUrl + '/' + id, movie);
+  return axios.put(apiUrl + "/movies/" + id, movie);
+}
+
+export function getStats(stat) {
+  return axios.get(apiUrl + "/stats/" + stat);
 }
