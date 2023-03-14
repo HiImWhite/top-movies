@@ -22,7 +22,6 @@ const Form = ({ isAdding, movieData }) => {
   const [formValues, setFormValues] = useState(movieData);
 
   const handleInput = (e, key) => {
-    console.log(e.target.value, key);
     setFormValues((prevFormValues) => ({
       ...prevFormValues,
       [key]: e.target.value,
@@ -37,7 +36,14 @@ const Form = ({ isAdding, movieData }) => {
       Object.keys(movieSchema).forEach((key) => {
         formData[key] = e.target.elements[key].value;
       });
-      // console.log(formData);
+
+      if (
+        isNaN(formData?.year) ||
+        isNaN(formData?.rating) ||
+        isNaN(formData?.budget) ||
+        isNaN(formData?.box_office)
+      )
+        return;
 
       if (isAdding) {
         addMovie(formData)
@@ -76,6 +82,7 @@ const Form = ({ isAdding, movieData }) => {
                 autoComplete='off'
                 value={formValues?.[key] || ''}
                 onChange={(e) => handleInput(e, key)}
+                required={true}
               />
               <span className={styles.label}>
                 {key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
