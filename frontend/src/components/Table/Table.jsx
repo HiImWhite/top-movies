@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import TableHead from './TableHead';
 import { getMovies } from '../../services/movieServices';
 import styles from './Table.module.css';
-import EditButton from '../EditButton/EditButton';
+// import EditButton from '../EditButton/EditButton';
+import ActionButton from '../ActionButton/ActionButton';
 
 const HeadTitles = [
   'Rank',
@@ -26,13 +27,6 @@ const Table = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await getMovies();
-        setMovies(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-
       await getMovies()
         .then(({ data }) => setMovies(data))
         .catch((err) => console.log(err));
@@ -76,7 +70,7 @@ const Table = () => {
                 <td>{movie.directors}</td>
                 <td>{movie.writers}</td>
                 <td>
-                  <EditButton movieId={movie._id} />
+                  <ActionButton movieId={movie._id} />
                 </td>
               </tr>
             ))}
