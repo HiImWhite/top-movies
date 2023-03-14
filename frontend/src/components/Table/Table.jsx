@@ -70,7 +70,7 @@ const Table = () => {
                 <td>{movie.directors}</td>
                 <td>{movie.writers}</td>
                 <td>
-                  <ActionButton movieId={movie._id} />
+                  <ActionButton movieData={movie} />
                 </td>
               </tr>
             ))}

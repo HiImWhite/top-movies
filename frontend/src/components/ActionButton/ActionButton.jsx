@@ -5,7 +5,7 @@ import AddIcon from '../Icons/AddIcon';
 import Modal from '../Modal/Modal';
 import styles from './ActionButton.module.css';
 
-const ActionButton = ({ isAdding = false, movieId }) => {
+const ActionButton = ({ isAdding = false, movieData }) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -19,7 +19,7 @@ const ActionButton = ({ isAdding = false, movieId }) => {
         title={isAdding ? 'Add data' : 'Edit data'}
         open={openModal}
         handleClose={() => setOpenModal(false)}>
-        <Form isAdding={isAdding} movieId={movieId} />
+        <Form isAdding={isAdding} movieData={movieData} />
       </Modal>
     </>
   );
