@@ -1,6 +1,6 @@
-import styles from './Form.module.css';
+import { useState } from 'react';
 import { addMovie, updateMovie } from '../../services/movieServices';
-import { useEffect } from 'react';
+import styles from './Form.module.css';
 
 const movieSchema = {
   // rank: String,
@@ -18,10 +18,16 @@ const movieSchema = {
   writers: String,
 };
 
-const Form = ({ isAdding, movieId }) => {
-  useEffect(() => {
-    console.count();
-  }, []);
+const Form = ({ isAdding, movieData }) => {
+  const [formValues, setFormValues] = useState(movieData);
+
+  const handleInput = (e, key) => {
+    console.log(e.target.value, key);
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      [key]: e.target.value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     // e.preventDefault();
@@ -42,7 +48,7 @@ const Form = ({ isAdding, movieId }) => {
             console.log(err);
           });
       } else {
-        updateMovie(movieId, formData)
+        updateMovie(movieData._id, formData)
           .then((response) => {
             console.log(response.data);
           })
@@ -68,6 +74,8 @@ const Form = ({ isAdding, movieId }) => {
                 title={`Type in a ${key}`}
                 name={key}
                 autoComplete='off'
+                value={formValues?.[key] || ''}
+                onChange={(e) => handleInput(e, key)}
               />
               <span className={styles.label}>
                 {key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
