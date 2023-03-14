@@ -1,5 +1,6 @@
 import styles from './Form.module.css';
 import { addMovie, updateMovie } from '../../services/movieServices';
+import { useEffect } from 'react';
 
 const movieSchema = {
   // rank: String,
@@ -18,51 +19,46 @@ const movieSchema = {
 };
 
 const Form = ({ isAdding, movieId }) => {
+  useEffect(() => {
+    console.count();
+  }, []);
+
   const handleSubmit = (e) => {
+    // e.preventDefault();
 
-    const formData = {};
-    Object.keys(movieSchema).forEach((key) => {
-      formData[key] = e.target.elements[key].value;
-    });
-    console.log(formData);
+    try {
+      const formData = {};
+      Object.keys(movieSchema).forEach((key) => {
+        formData[key] = e.target.elements[key].value;
+      });
+      // console.log(formData);
 
-    if (isAdding) {
-      addMovie(formData)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      updateMovie(movieId, formData)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (isAdding) {
+        addMovie(formData)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        updateMovie(movieId, formData)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
     <div className={styles.content}>
       <form id='form' className={styles.form} onSubmit={handleSubmit}>
-        {Object.keys(movieSchema).map((key, i) => (
-          /* <div key={key} className={styles.textInputs}>
-            <input
-              className={styles.input}
-              type='text'
-              placeholder={
-                key === 'rank'
-                  ? '>250'
-                  : key.charAt(0).toUpperCase() + key.slice(1)
-              }
-              title={`Type in a ${key}`}
-              disabled={key === 'rank' ? true : false}
-              name={key}
-            />
-          </div> */
+        {Object.keys(movieSchema).map((key) => (
           <div key={key}>
             <label className={styles.input}>
               <input
@@ -74,9 +70,7 @@ const Form = ({ isAdding, movieId }) => {
                 autoComplete='off'
               />
               <span className={styles.label}>
-                {key === 'rank'
-                  ? '>250'
-                  : key.charAt(0).toUpperCase() + key.slice(1)}
+                {key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
               </span>
             </label>
           </div>
