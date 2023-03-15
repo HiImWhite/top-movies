@@ -1,14 +1,14 @@
-const MovieModel = require("../models/movieModel");
+const MovieModel = require('../models/movieModel');
 
-function findRank(arr, newObject) {
-  const newRatingFloat = parseFloat(newObject.rating);
-  let i = 0;
-  while (i < arr.length && parseFloat(arr[i].rating) >= newRatingFloat) {
-    i++;
-  }
+// function findRank(arr, newObject) {
+//   const newRatingFloat = parseFloat(newObject.rating);
+//   let i = 0;
+//   while (i < arr.length && parseFloat(arr[i].rating) >= newRatingFloat) {
+//     i++;
+//   }
 
-  return i + 1;
-}
+//   return i + 1;
+// }
 
 async function sortRank() {
   const movies = await MovieModel.find({});
@@ -26,6 +26,6 @@ async function sortRank() {
 }
 
 module.exports = {
-  findRank,
+  // findRank,
   sortRank,
 };
