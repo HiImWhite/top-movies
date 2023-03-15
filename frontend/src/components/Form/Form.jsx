@@ -1,5 +1,6 @@
-import styles from './Form.module.css';
+import { useState } from 'react';
 import { addMovie, updateMovie } from '../../services/movieServices';
+import styles from './Form.module.css';
 
 const movieSchema = {
   // rank: String,
@@ -17,52 +18,59 @@ const movieSchema = {
   writers: String,
 };
 
-const Form = ({ isAdding, movieId }) => {
+const Form = ({ isAdding, movieData }) => {
+  const [formValues, setFormValues] = useState(movieData);
+
+  const handleInput = (e, key) => {
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      [key]: e.target.value,
+    }));
+  };
+
   const handleSubmit = (e) => {
+    // e.preventDefault();
 
-    const formData = {};
-    Object.keys(movieSchema).forEach((key) => {
-      formData[key] = e.target.elements[key].value;
-    });
-    console.log(formData);
+    try {
+      const formData = {};
+      Object.keys(movieSchema).forEach((key) => {
+        formData[key] = e.target.elements[key].value;
+      });
 
-    if (isAdding) {
-      addMovie(formData)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      updateMovie(movieId, formData)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (
+        isNaN(formData?.year) ||
+        isNaN(formData?.rating) ||
+        isNaN(formData?.budget) ||
+        isNaN(formData?.box_office)
+      )
+        return;
+
+      if (isAdding) {
+        addMovie(formData)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        updateMovie(movieData._id, formData)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
     <div className={styles.content}>
       <form id='form' className={styles.form} onSubmit={handleSubmit}>
-        {Object.keys(movieSchema).map((key, i) => (
-          /* <div key={key} className={styles.textInputs}>
-            <input
-              className={styles.input}
-              type='text'
-              placeholder={
-                key === 'rank'
-                  ? '>250'
-                  : key.charAt(0).toUpperCase() + key.slice(1)
-              }
-              title={`Type in a ${key}`}
-              disabled={key === 'rank' ? true : false}
-              name={key}
-            />
-          </div> */
+        {Object.keys(movieSchema).map((key) => (
           <div key={key}>
             <label className={styles.input}>
               <input
@@ -72,11 +80,12 @@ const Form = ({ isAdding, movieId }) => {
                 title={`Type in a ${key}`}
                 name={key}
                 autoComplete='off'
+                value={formValues?.[key] || ''}
+                onChange={(e) => handleInput(e, key)}
+                required={true}
               />
               <span className={styles.label}>
-                {key === 'rank'
-                  ? '>250'
-                  : key.charAt(0).toUpperCase() + key.slice(1)}
+                {key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
               </span>
             </label>
           </div>

@@ -1,45 +1,26 @@
-import Table from './components/Table/Table';
-import StickyButton from './components/StickyButton/StickyButton';
-import styles from './App.module.css';
 import { useState } from 'react';
+import NavBar from './components/NavBar/NavBar';
+import Table from './components/Table/Table';
 import Stats from './components/Stats/Stats';
+import ActionButton from './components/ActionButton/ActionButton';
 
 function App() {
   const [isTable, setIsTable] = useState(true);
 
-  const colors = {
-    active: "#BBBBBB",
-    inActive: "#777777",
-  }
+  const TableView = (
+    <>
+      <Table />
+      <ActionButton isAdding={true} />
+    </>
+  );
 
-  const SelectedTable = {
-    backgroundColor: isTable ? colors.active : colors.inActive
-  };
-
-  const SelectedStats = {
-    backgroundColor: isTable ? colors.inActive : colors.active
-  };
+  const StatsView = <Stats />;
 
   return (
-    <div>
-      <div className={styles.Navbar}>
-        <ul className={styles.List}>
-          <li style={SelectedTable} onClick={() => {setIsTable(true)}}>Table</li>
-          <li style={SelectedStats} onClick={() => {setIsTable(false)}}>Stats</li>
-        </ul>
-      </div>
-      {
-        isTable ?
-        <>
-          <Table />
-          <StickyButton />
-        </>
-        :
-        <>
-          <Stats />
-        </>
-      }
-    </div>
+    <>
+      <NavBar isTable={isTable} handleIsTable={setIsTable} />
+      {isTable ? TableView : StatsView}
+    </>
   );
 }
 
