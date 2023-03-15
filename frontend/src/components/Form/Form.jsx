@@ -37,13 +37,7 @@ const Form = ({ isAdding, movieData }) => {
         formData[key] = e.target.elements[key].value;
       });
 
-      if (
-        isNaN(formData?.year) ||
-        isNaN(formData?.rating) ||
-        isNaN(formData?.budget) ||
-        isNaN(formData?.box_office)
-      )
-        return;
+      if (isNaN(formData?.year) || isNaN(formData?.rating)) return;
 
       if (isAdding) {
         addMovie(formData)
