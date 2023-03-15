@@ -1,5 +1,5 @@
 const MovieModel = require("../models/movieModel");
-const { findRank } = require("../utilis/helperFunctions");
+const { findRank, sortRank } = require("../utilis/helperFunctions");
 
 const start = (req, res, next) => {
   try {
@@ -14,6 +14,8 @@ const getAllMovies = async (req, res) => {
   try {
     const params = req.query;
     console.log(params);
+
+    sortRank();
 
     if (!Object.keys(params).length) {
       const movies = await MovieModel.find({})
@@ -49,16 +51,6 @@ const postMovie = async (req, res) => {
 
     // await MovieModel.findOneAndDelete({ name: 'Test 3' });
 
-    allMovies.forEach(async (movie) => {
-      if (movie.rank >= rank) {
-        console.log(typeof (+movie.rank + 1).toString());
-        await MovieModel.findOneAndUpdate(
-          { rank: movie.rank },
-          { rank: (+movie.rank + 1).toString() }
-        );
-      }
-    });
-
     const movies = await MovieModel.create({
       rank: rank,
       name: params.name,
@@ -74,6 +66,10 @@ const postMovie = async (req, res) => {
       directors: params.directors,
       writers: params.writers,
     });
+
+    console.log("git");
+
+    sortRank();
     res.status(200).send(movies);
   } catch (err) {
     res.status(400).send(err);
