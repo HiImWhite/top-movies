@@ -30,8 +30,7 @@ app.get('*', (req, res) => {
 //const URI = 'mongodb://127.0.0.1:27017/db';
 
 //Azure
-const URI =
-  'mongodb://top-movies-db:9l1TsMl7TPnPJtwA6zGhdRCqq7lgu8wBDbMtmKdsjfY3koCwCN04fvjrYgrtyTPtiE5c46nn0g7ZACDbzC6VKw==@top-movies-db.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@top-movies-db@';
+const URI = `${process.env.AZURE}`;
 
 mongoose
   .connect(URI, {
