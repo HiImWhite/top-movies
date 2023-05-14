@@ -21,9 +21,9 @@ app.use(cors());
 app.set('port', process.env.PORT || PORT);
 app.use(routes);
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+  res.sendFile(path.join(__dirname + '../frontend/dist/index.html'));
 });
 
 // const URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@topmovies.kmfxfku.mongodb.net/topmovies?retryWrites=true&w=majority`;
