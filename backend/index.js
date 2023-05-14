@@ -3,10 +3,14 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const fs = require('fs');
+const csv = require('fast-csv');
 const app = express();
+const MovieModel = require('./models/movieModel');
 const PORT = 8000;
 
 const routes = require('./routes/movieRoute');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -17,7 +21,17 @@ app.use(cors());
 app.set('port', process.env.PORT || PORT);
 app.use(routes);
 
-const URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@topmovies.kmfxfku.mongodb.net/topmovies?retryWrites=true&w=majority`;
+app.use(express.static(path.join(__dirname, 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
+// const URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@topmovies.kmfxfku.mongodb.net/topmovies?retryWrites=true&w=majority`;
+//const URI = 'mongodb://127.0.0.1:27017/db';
+
+//Azure
+const URI =
+  'mongodb://top-movies-db:9l1TsMl7TPnPJtwA6zGhdRCqq7lgu8wBDbMtmKdsjfY3koCwCN04fvjrYgrtyTPtiE5c46nn0g7ZACDbzC6VKw==@top-movies-db.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@top-movies-db@';
 
 mongoose
   .connect(URI, {
@@ -26,6 +40,24 @@ mongoose
   })
   .then(() => {
     console.log('CONNECTED TO DATABASE');
+  })
+  .then(async () => {
+    const allRecords = [];
+
+    const data = await MovieModel.find({});
+
+    console.log(`Number of documents in DataBase: ${data.length}`);
+    if (data.length === 0)
+      fs.createReadStream(path.join(__dirname, '../', 'movies.csv')).pipe(
+        csv
+          .parse({ headers: true })
+          .on('error', (err) => console.log(err))
+          .on('data', (row) => allRecords.push(row))
+          .on('end', async (rowCount) => {
+            console.log(`${rowCount} rows has parsed`),
+              await MovieModel.insertMany(allRecords);
+          }),
+      );
   })
   .catch((e) => console.error(e));
 
