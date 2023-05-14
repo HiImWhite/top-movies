@@ -22,16 +22,12 @@ app.set('port', process.env.PORT || PORT);
 app.use(routes);
 
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../frontend/dist/index.html'));
-});
 
 // const URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@topmovies.kmfxfku.mongodb.net/topmovies?retryWrites=true&w=majority`;
 //const URI = 'mongodb://127.0.0.1:27017/db';
 
 //Azure
-const URI =
-  'mongodb://top-movies-db:9l1TsMl7TPnPJtwA6zGhdRCqq7lgu8wBDbMtmKdsjfY3koCwCN04fvjrYgrtyTPtiE5c46nn0g7ZACDbzC6VKw==@top-movies-db.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@top-movies-db@';
+const URI = `${process.env.AZURE}`;
 
 mongoose
   .connect(URI, {
@@ -66,4 +62,8 @@ server.listen(app.get('port'), function () {
   console.log(
     'Express server listening on: http://localhost:' + app.get('port'),
   );
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
